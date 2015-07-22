@@ -7,7 +7,9 @@ application.
 
 You may run this application by clicking below or cloning it locally.
 
+http://micyang.github.io/neighborhood-map/
+
 ## Resources
 
-Stackoverflow, w3Schools, Google Maps documentation, Yelp documentation and 
+Udacity, Stackoverflow, w3Schools, Google Maps documentation, Yelp documentation and 
 lots and lots of google searches
