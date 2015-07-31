@@ -1,4 +1,4 @@
-/*global ko google oauthSignature*/
+/*global ko google oauthSignature Offline*/
 
 // Yelp Constants
 var yelpKeyData = {
@@ -129,7 +129,8 @@ var MapViewModel = function() {
 				self.jsonGET(result, marker);
 	    	},
 	    	error: function () {
-	    		console.log("There is an error getting Yelp information");
+	    		console.log("There is an error getting Yelp information. Will attempt to get Yelp information again.");
+	    		self.yelpRequest(yelpID, marker);
 	    	}
 	   };
 	    
@@ -231,3 +232,10 @@ var MapViewModel = function() {
 };
 
 $(ko.applyBindings(new MapViewModel()));
+
+// Checks the internet status every 5 seconds
+var run = function(){
+ if (Offline.state === 'up')
+ Offline.check();
+ };
+$(setInterval(run, 5000));
