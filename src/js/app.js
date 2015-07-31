@@ -1,4 +1,5 @@
 /*global ko google oauthSignature Offline*/
+"use strict";
 
 // Yelp Constants
 var yelpKeyData = {
@@ -128,8 +129,9 @@ var MapViewModel = function() {
 	    	success: function (result, status, jq) {
 				self.jsonGET(result, marker);
 	    	},
-	    	error: function () {
+	    	error: function (jq, status, error) {
 	    		console.log("There is an error getting Yelp information. Will attempt to get Yelp information again.");
+	    		self.jsonGETFailed(marker);
 	    		self.yelpRequest(yelpID, marker);
 	    	}
 	   };
@@ -194,6 +196,16 @@ var MapViewModel = function() {
 		});
 	};
 	
+	// Once data is unsuccessful tell user 
+	self.jsonGETFailed = function(markerToUpdate) {
+		var contentString = '<div><h1>'+ markerToUpdate.name + '</h1><p>' + markerToUpdate.address + '</p><p> Rating: ERROR | # of Reviews: ERROR</p><p>Resending Request</p>></div>';
+		self.infowindow = new google.maps.InfoWindow();
+		google.maps.event.addListener(markerToUpdate, 'click', function() {
+			self.infowindow.setContent(contentString);
+		    self.infowindow.open(self.map, this);
+		});
+	};
+	
 	self.resetCenter = function() {
 		self.map.panTo(self.center);
 	};
@@ -216,6 +228,7 @@ var MapViewModel = function() {
 	self.filterWordSearch = ko.computed( function() {
     	return self.filterWord().toLowerCase().split(' ');
     });
+    
     self.filterSubmit = function() {
     	self.filterWordSearch().forEach(function(word) {
     		self.markers().forEach(function(marker) {
@@ -233,9 +246,9 @@ var MapViewModel = function() {
 
 $(ko.applyBindings(new MapViewModel()));
 
-// Checks the internet status every 5 seconds
+// Checks the internet status every 7 seconds
 var run = function(){
  if (Offline.state === 'up')
  Offline.check();
  };
-$(setInterval(run, 5000));
+$(setInterval(run, 7000));

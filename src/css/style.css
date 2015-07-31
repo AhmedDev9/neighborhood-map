@@ -1,4 +1,7 @@
 /* Content */
+/* using a class as the map canvas doesn't work
+all of the google examples have map canvas using
+an id */
 html,
 body, 
 #map-canvas {
@@ -51,31 +54,37 @@ h1 {
         overflow: auto;
         max-height: 100px;
     }
+    
+    .form-ui {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 99; 
+    }
 }
 
 @media screen and (min-width: 415px) {
     .list-ui {
         position: absolute;
-        left: 10px;
-        top: 40px;
+        left: 20px;
+        top: 50px;
         z-index: 99;
-        
     }
 }
 
 /* https://css-tricks.com/examples/ButtonMaker/# */
 .button {
-   border-top: 1px solid #000000;
-   background: #000000;
-   background: -webkit-gradient(linear, left top, left bottom, from(#27272e), to(#000000));
-   background: -webkit-linear-gradient(top, #27272e, #000000);
-   background: -moz-linear-gradient(top, #27272e, #000000);
-   background: -ms-linear-gradient(top, #27272e, #000000);
-   background: -o-linear-gradient(top, #27272e, #000000);
+   border-top: 1px solid #000;
+   background: #000;
+   background: -webkit-gradient(linear, left top, left bottom, from(#27272e), to(#000));
+   background: -webkit-linear-gradient(top, #27272e, #000);
+   background: -moz-linear-gradient(top, #27272e, #000);
+   background: -ms-linear-gradient(top, #27272e, #000);
+   background: -o-linear-gradient(top, #27272e, #000);
    padding: 4.5px 9px;
-   -webkit-border-radius: 0px;
-   -moz-border-radius: 0px;
-   border-radius: 0px;
+   -webkit-border-radius: 0;
+   -moz-border-radius: 0;
+   border-radius: 0;
    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
    box-shadow: rgba(0,0,0,1) 0 1px 0;
@@ -94,6 +103,6 @@ h1 {
 }
    
 .button:active {
-   border-top-color: #000000;
-   background: #000000;
+   border-top-color: #000;
+   background: #000;
 }
